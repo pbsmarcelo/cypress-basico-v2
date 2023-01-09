@@ -1,0 +1,10 @@
+Instalar Cypress:
+git --version && node --version && npm --version
+npm install cypress@9.5.1 --save-dev
+
+
+Instalação com problema
+npx cypress install --force
+npx cypress open
+
+yarn run cypress install --force
