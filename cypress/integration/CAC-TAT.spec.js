@@ -132,5 +132,15 @@ it('marca ambos checkboxes, depois desmarca o último', function(){
     .should('not.be.checked')
 })
 
+it.only('seleciona um arquivo da pasta fixtures', function(){
+    //Poderia ser apenas cy.get('input[type="file"]')
+    cy.get('input[type="file"]#file-upload')
+        .should('not.have.value')
+        .selectFile('./Cypress/fixtures/example.json')
+        .should(function($input){
+            console.log($input)
+            expect($input[0].files[0].name).to.equal('example.json')
+        })
+})
   })
   
