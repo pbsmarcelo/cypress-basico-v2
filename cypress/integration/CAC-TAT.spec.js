@@ -156,11 +156,27 @@ it('seleciona um arquivo simulando um drag-and-drop', function(){
 it('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', function(){
     cy.fixture('example.json').as('SampleFile')
     cy.get('input[type="file"]#file-upload')
-    .selectFile('@SampleFile')
-    .should(function($input){
+        .selectFile('@SampleFile')
+        .should(function($input){
         console.log($input)
-        expect($input[0].files[0].name).to.equal('example.json')
+            expect($input[0].files[0].name).to.equal('example.json')
     })
 })
+
+it('verifica que a política de privacidade abre em outra aba sem a necessidade de um clique', function(){
+    cy.get('#privacy a').should('have.attr', 'target', '_blank')
+})
+
+it('acessa a página da política de privacidade removendo o target e então clicando no link', function(){
+    cy.get('#privacy a')
+        .invoke('removeAttr', 'target')
+        .click()
+
+    cy.contains('CAC TAT - Política de privacidade')
+        .should('be.visible')
+})
+
+
+
   })
   
