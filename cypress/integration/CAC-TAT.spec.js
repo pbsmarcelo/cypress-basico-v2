@@ -177,6 +177,5 @@ it('acessa a página da política de privacidade removendo o target e então cli
 })
 
 
-
   })
   
