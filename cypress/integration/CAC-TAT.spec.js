@@ -132,7 +132,7 @@ it('marca ambos checkboxes, depois desmarca o último', function(){
     .should('not.be.checked')
 })
 
-/* it('seleciona um arquivo da pasta fixtures', function(){
+it('seleciona um arquivo da pasta fixtures', function(){
     //Poderia ser apenas cy.get('input[type="file"]')
     cy.get('input[type="file"]#file-upload')
         .should('not.have.value')
@@ -141,8 +141,9 @@ it('marca ambos checkboxes, depois desmarca o último', function(){
             console.log($input)
             expect($input[0].files[0].name).to.equal('example.json')
         })
-}) */
-/* 
+})
+
+
 it('seleciona um arquivo simulando um drag-and-drop', function(){
     cy.get('input[type="file"]#file-upload')
         .should('not.have.value')
@@ -151,7 +152,7 @@ it('seleciona um arquivo simulando um drag-and-drop', function(){
             console.log($input)
             expect($input[0].files[0].name).to.equal('example.json')
         })
-}) */
+})
 
 it('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', function(){
     cy.fixture('example.json').as('SampleFile')
