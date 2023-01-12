@@ -49,8 +49,10 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('.error').should('not.be.visible')
     })
 
-    it('campo telefone contia vazio quando preenchido com valor não-numérico', function(){
-        cy.get('#phone').type('abcdefghijklmno').should('have.value', '')
+    Cypress._.times(3, function(){
+        it.only('campo telefone contia vazio quando preenchido com valor não-numérico', function(){
+            cy.get('#phone').type('abcdefghijklmno').should('have.value', '')
+        })
     })
 
     it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function(){
@@ -95,7 +97,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
             .should('have.value', '')
     })
 
-it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
+it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
     cy.clock()
     
     cy.get('button[type="submit"]').click()
@@ -104,7 +106,7 @@ it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campo
     cy.get('.error').should('not.be.visible')
 })
 
-it.only('envia o formuário com sucesso usando um comando customizado', function(){
+it('envia o formuário com sucesso usando um comando customizado', function(){
     cy.clock()
     cy.fillMandatoryFieldsAndSubmit()
 
