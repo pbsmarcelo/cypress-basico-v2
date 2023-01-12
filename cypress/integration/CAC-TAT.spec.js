@@ -50,7 +50,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
 
     Cypress._.times(3, function(){
-        it.only('campo telefone contia vazio quando preenchido com valor não-numérico', function(){
+        it('campo telefone contia vazio quando preenchido com valor não-numérico', function(){
             cy.get('#phone').type('abcdefghijklmno').should('have.value', '')
         })
     })
@@ -161,11 +161,11 @@ it('marca ambos checkboxes, depois desmarca o último', function(){
     .should('not.be.checked')
 })
 
-/* it('seleciona um arquivo da pasta fixtures', function(){
+it('seleciona um arquivo da pasta fixtures', function(){
     //Poderia ser apenas cy.get('input[type="file"]')
     cy.get('input[type="file"]#file-upload')
         .should('not.have.value')
-        .selectFile('./Cypress/fixtures/example.json')
+        .selectFile('./cypress/fixtures/example.json')
         .should(function($input){
             console.log($input)
             expect($input[0].files[0].name).to.equal('example.json')
@@ -176,12 +176,12 @@ it('marca ambos checkboxes, depois desmarca o último', function(){
 it('seleciona um arquivo simulando um drag-and-drop', function(){
     cy.get('input[type="file"]#file-upload')
         .should('not.have.value')
-        .selectFile('./Cypress/fixtures/example.json', { action: "drag-drop"})
+        .selectFile('./cypress/fixtures/example.json', { action: "drag-drop"})
         .should(function($input){
             console.log($input)
             expect($input[0].files[0].name).to.equal('example.json')
         })
-}) */
+})
 
 it('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', function(){
     cy.fixture('example.json').as('SampleFile')
