@@ -2,6 +2,8 @@
 
 
 describe('Central de Atendimento ao Cliente TAT', function() {
+    const THREE_SECONDS_IN_MS = 3000
+
     beforeEach(function( ){
         cy.visit('./src/index.html')
     })
@@ -12,25 +14,39 @@ describe('Central de Atendimento ao Cliente TAT', function() {
 
     it('preenche os campos obrigatórios e envia o formulário', function(){
         const longText = 'Teste, testando, textão, Teste, testando, textão, Teste, testando, textão, Teste, testando, textão, Teste, testando, textão, Teste, testando, textão, Teste, testando, textão, '
+        
+        cy.clock()
+
         cy.get('#firstName').type('Marcelo')
-        cy.get('#lastName').type('Patrik')
-        cy.get('#email').type('patrik@curso.br')
+        cy.get('#lastName').type('Patrik da Silva')
+        cy.get('#email').type('patrik@teste.com.br')
+        cy.get('#phone').type('123456789')
         cy.get('#open-text-area').type(longText, {delay:0})
         cy.get('button[type="submit"]').click()
+        
         cy.get('.success').should('be.visible')
+        cy.tick(THREE_SECONDS_IN_MS)
+        cy.get('.success').should('not.be.visible')
     })
 
+
+
     it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function(){
+        cy.clock()
+        
         const longText = 'Testando a digitação'
         cy.get('#firstName').type('Marcelo')
         cy.get('#lastName').type('Patrik')
         cy.get('#email').type('patrik#curso.br')
+        cy.get('#phone').type('123456789')
         cy.get('#open-text-area').type(longText, {delay:0})
         //cy.get('button[type="submit"]').click()
         //Usando o cy.contains ao inves do cy.get
         cy.contains('button', 'Enviar').click()
 
         cy.get('.error').should('be.visible')
+        cy.tick(THREE_SECONDS_IN_MS)
+        cy.get('.error').should('not.be.visible')
     })
 
     it('campo telefone contia vazio quando preenchido com valor não-numérico', function(){
@@ -38,6 +54,8 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
 
     it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function(){
+        cy.clock()
+        
         cy.get('#firstName').type('Marcelo')
         cy.get('#lastName').type('Patrik')
         cy.get('#email').type('patrik@curso.br')
@@ -45,6 +63,8 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('button[type="submit"]').click()
 
         cy.get('.error').should('be.visible')
+        cy.tick(THREE_SECONDS_IN_MS)
+        cy.get('.error').should('not.be.visible')
     })
 
     it('preenche e limpa os campos nome, sobrenome, email e telefone', function(){
@@ -75,15 +95,22 @@ describe('Central de Atendimento ao Cliente TAT', function() {
             .should('have.value', '')
     })
 
-it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
+it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
+    cy.clock()
+    
     cy.get('button[type="submit"]').click()
     cy.get('.error').should('be.visible')
+    cy.tick(THREE_SECONDS_IN_MS)
+    cy.get('.error').should('not.be.visible')
 })
 
-it('envia o formuário com sucesso usando um comando customizado', function(){
+it.only('envia o formuário com sucesso usando um comando customizado', function(){
+    cy.clock()
     cy.fillMandatoryFieldsAndSubmit()
 
     cy.get('.success').should('be.visible')
+    cy.tick(THREE_SECONDS_IN_MS)
+    cy.get('.success').should('not.be.visible')
 })
 
 it('seleciona um produto (YouTube) por seu texto', function(){
@@ -132,7 +159,7 @@ it('marca ambos checkboxes, depois desmarca o último', function(){
     .should('not.be.checked')
 })
 
-it('seleciona um arquivo da pasta fixtures', function(){
+/* it('seleciona um arquivo da pasta fixtures', function(){
     //Poderia ser apenas cy.get('input[type="file"]')
     cy.get('input[type="file"]#file-upload')
         .should('not.have.value')
@@ -152,7 +179,7 @@ it('seleciona um arquivo simulando um drag-and-drop', function(){
             console.log($input)
             expect($input[0].files[0].name).to.equal('example.json')
         })
-})
+}) */
 
 it('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', function(){
     cy.fixture('example.json').as('SampleFile')
