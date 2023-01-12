@@ -223,5 +223,13 @@ it('exibe e esconde as mensagens de sucesso e erro usando o .invoke', () => {
       .should('not.be.visible')
   })
 
+  it.only('preenche a area de texto usando o comando invoke', function () {
+    const longText = Cypress._.repeat('0123456789', 20)
+
+    cy.get('#open-text-area')
+        .invoke('val', longText)
+        .should('have.value', longText)
+  })
+
   })
   
