@@ -27,3 +27,6 @@ Vá para a seção [estrutura do curso](./lessons/_course-structure_.md).
 ___
 
 Este é mais um curso da [**Escola Talking About Testing**](https://udemy.com/user/walmyr).
+
+Treinamento realizado para aprender e praticar conceitos sobre a utilização da ferrmenta Cypress, na contrução de testes automatizados de aplicações web.
+Marcelo Patrik
